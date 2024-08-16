@@ -71,5 +71,5 @@ sudo systemctl enable hdmi_control.service
 echo -e "\e[1m🎉 Installation terminée !\e[0m"
 
 # Attendre une touche pour redémarrer
-read -p "Appuyez sur une touche pour redémarrer..."
+read -p "Appuyez sur une touche pour redémarrer, ou Ctrl+C pour continuer sans redémarrer..."
 sudo reboot
