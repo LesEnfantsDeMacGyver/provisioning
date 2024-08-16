@@ -58,7 +58,7 @@ sudo cp provisioning/dialing_computer/splash.png /boot/firmware/splash.png
 
 # Remplacer `/boot/firmware/fullpageos.txt` par le fichier `fullpageos.txt`
 echo -e "\e[1m🔗 Configuration du lien vers le Dialing Program...\e[0m"
-sudo cp provisioning/dialing_computer/fullpageos.txt /boot/firmware/fullpageos.txt
+sudo cp provisioning/dialing_computer/dialing_program_url.txt /boot/firmware/fullpageos.txt
 
 # Résolution du nom d'hôte pour accéder à Mothership
 echo -e "\e[1m🌐 Résolution du nom d'hôte pour accéder à Mothership (192.168.64.5)...\e[0m"
