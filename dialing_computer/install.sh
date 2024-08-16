@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Si ce script fonctionne depuis un Docker, il faut activer "privileged: true" et "user: root" pour que les ordres CEC soient exécutés correctement.
+# Si ce script fonctionne depuis un Docker, il faut activer "privileged: true" et "user: root" pour que les ordres CEC soient exécutés correctement dans startup.sh.
 
 cat << "EOF"
 
@@ -63,6 +63,7 @@ sudo apt-get install -y cec-utils libcec-dev
 
 # Installation du service pour le Dialing Computer
 echo -e "\e[1m🚀 Installation du service pour le Dialing Computer...\e[0m"
+sudo chmod +x provisioning/dialing_computer/startup.sh
 sudo cp provisioning/dialing_computer/hdmi_control.service /etc/systemd/system/
 sudo systemctl enable hdmi_control.service
 
