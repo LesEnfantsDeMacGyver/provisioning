@@ -1,0 +1,10 @@
+[Unit]
+Description=HDMI Control
+
+[Service]
+ExecStart=/home/pi/provisioning/dialing_computer/startup.sh
+Type=oneshot
+RemainAfterExit=true
+
+[Install]
+WantedBy=multi-user.target
