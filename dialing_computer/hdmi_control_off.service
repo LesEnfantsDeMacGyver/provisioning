@@ -1,0 +1,11 @@
+[Unit]
+Description=HDMI Control Off
+DefaultDependencies=no
+Before=shutdown.target
+
+[Service]
+ExecStart=/home/pi/provisioning/dialing_computer/hdmi_control.sh off
+Type=oneshot
+
+[Install]
+WantedBy=shutdown.target

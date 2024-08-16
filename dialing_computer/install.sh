@@ -66,9 +66,11 @@ sudo apt-get install -y cec-utils libcec-dev
 
 # Installation du service pour le Dialing Computer
 echo -e "\e[1m🚀 Installation du service pour le Dialing Computer...\e[0m"
-sudo chmod +x provisioning/dialing_computer/startup.sh
-sudo cp provisioning/dialing_computer/hdmi_control.service /etc/systemd/system/
-sudo systemctl enable hdmi_control.service
+sudo chmod +x provisioning/dialing_computer/hdmi_control.sh
+sudo cp provisioning/dialing_computer/hdmi_control_on.service /etc/systemd/system/
+sudo cp provisioning/dialing_computer/hdmi_control_off.service /etc/systemd/system/
+sudo systemctl enable hdmi_control_on.service
+sudo systemctl enable hdmi_control_off.service
 
 # Fin de l'installation
 echo -e "\e[1m🎉 Installation terminée !\e[0m"

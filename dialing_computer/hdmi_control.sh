@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # Source: https://gist.github.com/rmtsrc/dc35cd1458cd995631a4f041ab11ff74
+# Arguments: "on" or "off"
 
 # Turn on the TV and set the input to the correct one
 if [ "$1" == "on" ] || [ -z "$1" ]
