@@ -17,4 +17,4 @@ Ce dépôt contient les scripts nécessaires à la préparation automatique des 
 
 1. Déployer FullPageOS (64-bit) sur une carte SD / sur un SSD avec (par exemple en utilisant [Raspberry Pi Imager](https://www.raspberrypi.com/software/)). Dans les paramètres, définir le nom d'hôte à `dialing-computer`, activer SSH (avec un mot de passe), définir le nom d'utilisateur et mot de passe (comme indiqué dans [CREDENTIALS.md](https://github.com/LesEnfantsDeMacGyver/control_system/CREDENTIALS.md), désactiver le Wi-Fi et définir les réglages locaux (fuseau horaire `Europe/Zurich` et clavier `ch`).
 2. Démarrer la machine et connecter une session SSH. Exécuter la commande d'installation automatisée :
-   `bash <(wget -qO- https://raw.githubusercontent.com/LesEnfantsDeMacGyver/provisioning/dialing_computer/install.sh)` et suivre les instructions.
+   `bash <(wget -qO- https://raw.githubusercontent.com/LesEnfantsDeMacGyver/provisioning/main/dialing_computer/install.sh)` et suivre les instructions.
