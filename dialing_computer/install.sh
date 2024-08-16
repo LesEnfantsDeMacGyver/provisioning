@@ -40,7 +40,7 @@ fi
 
 # Mise à jour du système et installation des paquets de base
 echo -e "\e[1m📦 Mise à jour du système et installation des paquets de base...\e[0m"
-sudo apt update -y && sudo apt upgrade -y && sudo apt install -y git
+sudo apt update -y > /dev/null && sudo apt upgrade -y > /dev/null && sudo apt install -y git > /dev/null
 
 # Cloner le dépôt
 echo -e "\e[1m🔗 Clonage du dépôt...\e[0m"
