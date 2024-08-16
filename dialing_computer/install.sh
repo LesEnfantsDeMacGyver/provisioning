@@ -44,6 +44,9 @@ sudo apt update -y > /dev/null && sudo apt upgrade -y > /dev/null && sudo apt in
 
 # Cloner le dépôt
 echo -e "\e[1m🔗 Clonage du dépôt...\e[0m"
+if [ -d "provisioning" ]; then
+    rm -rf provisioning
+fi
 git clone https://github.com/LesEnfantsDeMacGyver/provisioning.git
 
 # Remplacer `/opt/custompios/background.png` et `/boot/firmware/splash.png` par le fichier `splash.png` pour que le logo des EMG apparaissent durant le démarrage, en utilisant des symlink.
