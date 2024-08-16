@@ -53,8 +53,8 @@ git clone https://github.com/LesEnfantsDeMacGyver/provisioning.git
 echo -e "\e[1m🔗 Création des liens symboliques pour le logo de démarrage...\e[0m"
 sudo rm -f /opt/custompios/background.png
 sudo rm -f /boot/firmware/splash.png
-sudo ln -s provisioning/dialing_computer/splash.png /opt/custompios/background.png
-sudo ln -s provisioning/dialing_computer/splash.png /boot/firmware/splash.png
+sudo cp provisioning/dialing_computer/splash.png /opt/custompios/background.png
+sudo cp provisioning/dialing_computer/splash.png /boot/firmware/splash.png
 
 # Résolution du nom d'hôte pour accéder à Mothership
 echo -e "\e[1m🌐 Résolution du nom d'hôte pour accéder à Mothership (192.168.64.5)...\e[0m"
