@@ -1,1 +1,1 @@
-http://mothership:4730?device={serial}
+https://www.youtube.com/embed/2-0W4qsc3Vw?si=sC5WBUwrzZ5p358Y&autoplay=true&controls=0&modestbranding&loop=1
