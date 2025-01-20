@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Si ce script fonctionne depuis un Docker, il faut activer "privileged: true" et "user: root" pour que les ordres CEC soient exécutés correctement.
+
 # Source: https://gist.github.com/rmtsrc/dc35cd1458cd995631a4f041ab11ff74
 # Arguments: "on" or "off"
 
