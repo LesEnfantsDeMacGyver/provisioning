@@ -6,6 +6,8 @@ Before=shutdown.target
 [Service]
 ExecStart=/home/pi/provisioning/dialing_computer/hdmi_control.sh off
 Type=oneshot
+RemainAfterExit=true
+TimeoutSec=5
 
 [Install]
 WantedBy=shutdown.target

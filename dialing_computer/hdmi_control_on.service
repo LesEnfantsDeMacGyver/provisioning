@@ -5,6 +5,7 @@ Description=HDMI Control On
 ExecStart=/home/pi/provisioning/dialing_computer/hdmi_control.sh on
 Type=oneshot
 RemainAfterExit=true
+TimeoutSec=5
 
 [Install]
 WantedBy=multi-user.target
