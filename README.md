@@ -20,3 +20,9 @@ Ce dépôt contient les scripts nécessaires à la préparation automatique des 
    `bash <(wget -qO- https://raw.githubusercontent.com/LesEnfantsDeMacGyver/provisioning/main/dialing_computer/install.sh?token=$(cat /proc/sys/kernel/random/uuid))` et suivre les instructions.
 
 En cas de besoin, on pourra remplacer le contenu de `dialing_program_url.txt` par une URL personnalisée (par exemple `https://www.youtube.com/embed/2-0W4qsc3Vw?si=sC5WBUwrzZ5p358Y&autoplay=true&controls=0&modestbranding&loop=1` pour afficher une vidéo YouTube en boucle).
+
+### Diagnostiquer les problèmes de Chromium à distance
+1. Ajouter l'argument `--remote-debugging-port=9222` à la ligne de commande du Chromium distant.
+2. Lancer `ssh -L 9222:localhost:9222 pi@dialing-computer` sur la machine locale.
+3. Naviguer vers `chrome://inspect/#devices` sur la machine locale.
+4. L'instance Chromium de la machine distante devrait apparaître dans la liste. Cliquer sur `Inspect` pour ouvrir la console de développement de Chromium.
