@@ -36,12 +36,24 @@ else
     exit 1
 fi
 
-# Définition d'une adresse IP statique 
-sudo nmcli connection modify "Wired connection 1" ipv4.method manual ipv4.addr "192.168.64.5/18" ipv4.gateway "192.168.64.1"
+# Définition d'une adresse IP statique
+sudo nmcli connection modify "Wired connection 1" ipv4.method manual ipv4.addr "192.168.64.5/18" ipv4.gateway "192.168.64.1" ipv4.dns "192.168.64.1" ipv4.ignore-auto-dns no
+sudo nmcli connection up "Wired connection 1"
 
 # Mise à jour du système et installation des paquets de base
 echo -e "\e[1m📦 Mise à jour du système et installation des paquets de base...\e[0m"
-sudo apt update -y && sudo apt upgrade -y && sudo apt install -y curl
+sudo apt update -y && sudo apt upgrade -y && sudo apt install -y curl cifs-utils
+
+# Montage du partage SMB sur /mnt/videosurveillance
+sudo mkdir -p /mnt/videosurveillance
+
+# Ajout de l'entrée dans /etc/fstab si elle n'existe pas déjà
+if ! grep -q "//192.168.64.39/EMG/videosurveillance /mnt/videosurveillance cifs" /etc/fstab; then
+    echo "//192.168.64.39/EMG/videosurveillance /mnt/videosurveillance cifs username=frigate,password=Lmfh4T7DE5z5GPq,vers=3.0,iocharset=utf8,uid=1000,gid=1000,file_mode=0755,dir_mode=0755 0 0" | sudo tee -a /etc/fstab
+fi
+
+# Montage immédiat du partage
+sudo mount -a
 
 # Installation de Docker
 echo -e "\e[1m🐳 Installation de Docker...\e[0m"
