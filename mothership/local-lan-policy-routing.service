@@ -1,0 +1,14 @@
+[Unit]
+Description=Prefer local LAN routing for 192.168.64.0/18 before Tailscale policy routes
+After=network-online.target tailscaled.service docker.service
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=-/usr/sbin/ip rule add pref 100 to 192.168.64.0/18 lookup main
+ExecStart=/usr/sbin/ip route flush cache
+ExecStop=-/usr/sbin/ip rule del pref 100
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
