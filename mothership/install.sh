@@ -36,12 +36,17 @@ else
     exit 1
 fi
 
-# Définition d'une adresse IP statique 
+# Définition d'une adresse IP statique
 sudo nmcli connection modify "Wired connection 1" ipv4.method manual ipv4.addr "192.168.64.5/18" ipv4.gateway "192.168.64.1"
 
 # Mise à jour du système et installation des paquets de base
 echo -e "\e[1m📦 Mise à jour du système et installation des paquets de base...\e[0m"
 sudo apt update -y && sudo apt upgrade -y && sudo apt install -y curl
+
+# Règle de routage persistante pour garder le LAN local prioritaire sur Tailscale
+sudo cp provisioning/mothership/local-lan-policy-routing.service /etc/systemd/system/
+sudo systemctl daemon-reload
+sudo systemctl enable --now local-lan-policy-routing.service
 
 # Installation de Docker
 echo -e "\e[1m🐳 Installation de Docker...\e[0m"
