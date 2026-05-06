@@ -21,7 +21,7 @@ ssh_target() {
 }
 
 copy_env_file() {
-    ssh_target REMOTE_DIR="${REMOTE_DIR}" 'mkdir -p "${REMOTE_DIR}"'
+    ssh_target "mkdir -p '${REMOTE_DIR}'"
     scp -o StrictHostKeyChecking=accept-new "${ENV_FILE}" "${TARGET}:${REMOTE_DIR}/.env"
 }
 
