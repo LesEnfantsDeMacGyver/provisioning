@@ -21,10 +21,13 @@ ssh_target() {
 }
 
 copy_env_file() {
+    ssh_target REMOTE_DIR="${REMOTE_DIR}" 'mkdir -p "${REMOTE_DIR}"'
     scp -o StrictHostKeyChecking=accept-new "${ENV_FILE}" "${TARGET}:${REMOTE_DIR}/.env"
 }
 
 echo "Deploying docker_stacks to ${TARGET}:${REMOTE_DIR}"
+
+copy_env_file
 
 ssh_target REPO_URL="${REPO_URL}" BRANCH="${BRANCH}" REMOTE_DIR="${REMOTE_DIR}" 'bash -s' <<'REMOTE'
 set -Eeuo pipefail
@@ -34,18 +37,29 @@ if ! command -v git >/dev/null 2>&1; then
     sudo apt-get install -y git
 fi
 
+set -a
+. "${REMOTE_DIR}/.env"
+set +a
+
+git_auth=()
+if [ -n "${GITHUB_TOKEN:-}" ]; then
+    git_auth=(-c "http.https://github.com/.extraheader=AUTHORIZATION: bearer ${GITHUB_TOKEN}")
+fi
+
 if [ -d "${REMOTE_DIR}/.git" ]; then
     cd "${REMOTE_DIR}"
-    git fetch --prune origin
+    git "${git_auth[@]}" fetch --prune origin
     git checkout "${BRANCH}"
     git reset --hard "origin/${BRANCH}"
 else
+    tmp_dir="$(mktemp -d)"
+    git "${git_auth[@]}" clone --branch "${BRANCH}" "${REPO_URL}" "${tmp_dir}/docker_stacks"
+    cp "${REMOTE_DIR}/.env" "${tmp_dir}/docker_stacks/.env"
     rm -rf "${REMOTE_DIR}"
-    git clone --branch "${BRANCH}" "${REPO_URL}" "${REMOTE_DIR}"
+    mv "${tmp_dir}/docker_stacks" "${REMOTE_DIR}"
+    rmdir "${tmp_dir}"
 fi
 REMOTE
-
-copy_env_file
 
 ssh_target REMOTE_DIR="${REMOTE_DIR}" 'bash -s' <<'REMOTE'
 set -Eeuo pipefail
