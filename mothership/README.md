@@ -21,7 +21,7 @@ Depuis la machine de développement, après le provisioning de base :
 mothership/deploy-docker-stacks.sh pi@192.168.64.5
 ```
 
-Le script met à jour `/home/pi/docker_stacks` depuis Git, copie le fichier
+Le script met à jour `/home/pi/docker_stacks` depuis la branche `master` de Git, copie le fichier
 local `../docker_stacks/.env`, puis lance le `compose.yml` racine avec Docker
 Compose. Les conteneurs restent visibles dans Portainer, même si la stack est
 gérée par Docker Compose.

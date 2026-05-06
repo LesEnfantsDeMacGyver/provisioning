@@ -3,7 +3,7 @@ set -Eeuo pipefail
 
 TARGET="${1:-pi@192.168.64.5}"
 REPO_URL="${DOCKER_STACKS_REPO_URL:-https://github.com/LesEnfantsDeMacGyver/docker_stacks.git}"
-BRANCH="${DOCKER_STACKS_BRANCH:-main}"
+BRANCH="${DOCKER_STACKS_BRANCH:-master}"
 REMOTE_DIR="${DOCKER_STACKS_REMOTE_DIR:-/home/pi/docker_stacks}"
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
