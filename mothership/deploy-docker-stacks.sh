@@ -41,23 +41,37 @@ set -a
 . "${REMOTE_DIR}/.env"
 set +a
 
-git_auth=()
 if [ -n "${GITHUB_TOKEN:-}" ]; then
-    git_auth=(-c "http.https://github.com/.extraheader=AUTHORIZATION: bearer ${GITHUB_TOKEN}")
+    askpass="$(mktemp)"
+    cat >"${askpass}" <<'ASKPASS'
+#!/bin/sh
+case "$1" in
+    *Username*) printf '%s\n' "x-access-token" ;;
+    *Password*) printf '%s\n' "${GITHUB_TOKEN}" ;;
+    *) printf '\n' ;;
+esac
+ASKPASS
+    chmod 700 "${askpass}"
+    export GIT_ASKPASS="${askpass}"
+    export GIT_TERMINAL_PROMPT=0
 fi
 
 if [ -d "${REMOTE_DIR}/.git" ]; then
     cd "${REMOTE_DIR}"
-    git "${git_auth[@]}" fetch --prune origin
+    git fetch --prune origin
     git checkout "${BRANCH}"
     git reset --hard "origin/${BRANCH}"
 else
     tmp_dir="$(mktemp -d)"
-    git "${git_auth[@]}" clone --branch "${BRANCH}" "${REPO_URL}" "${tmp_dir}/docker_stacks"
+    git clone --branch "${BRANCH}" "${REPO_URL}" "${tmp_dir}/docker_stacks"
     cp "${REMOTE_DIR}/.env" "${tmp_dir}/docker_stacks/.env"
     rm -rf "${REMOTE_DIR}"
     mv "${tmp_dir}/docker_stacks" "${REMOTE_DIR}"
     rmdir "${tmp_dir}"
+fi
+
+if [ -n "${askpass:-}" ]; then
+    rm -f "${askpass}"
 fi
 REMOTE
 
