@@ -79,7 +79,6 @@ ssh_target REMOTE_DIR="${REMOTE_DIR}" 'bash -s' <<'REMOTE'
 set -Eeuo pipefail
 
 cd "${REMOTE_DIR}"
-sudo docker volume create docker_stacks_chataigne >/dev/null
 sudo docker compose up -d --build
 sudo docker compose up -d --no-deps --force-recreate reverse-proxy
 sudo docker compose ps
