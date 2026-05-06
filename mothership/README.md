@@ -12,3 +12,16 @@
    - continue l'installation si le partage SMB est temporairement injoignable ; l'entrée `/etc/fstab` reste configurée pour un montage ultérieur
 4. Dans Portainer, [ajouter une stack via Git](https://docs.portainer.io/user/docker/stacks/add#option-3-git-repository) en pointant vers `https://github.com/LesEnfantsDeMacGyver/control_system/`.
 5. Lors du premier démarrage de Chataigne, il faut parfois resélectionner le convertisseur USB-DMX dans les modules puis redémarrer l'application.
+
+## Déployer docker_stacks
+
+Depuis la machine de développement, après le provisioning de base :
+
+```bash
+mothership/deploy-docker-stacks.sh pi@192.168.64.5
+```
+
+Le script met à jour `/home/pi/docker_stacks` depuis Git, copie le fichier
+local `../docker_stacks/.env`, puis lance le `compose.yml` racine avec Docker
+Compose. Les conteneurs restent visibles dans Portainer, même si la stack est
+gérée par Docker Compose.
